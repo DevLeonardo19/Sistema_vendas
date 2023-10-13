@@ -35,11 +35,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.dgwCliente = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnConsultaCep = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(587, 6);
+            this.btnBuscar.Location = new System.Drawing.Point(667, 6);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(104, 29);
             this.btnBuscar.TabIndex = 32;
@@ -102,7 +102,7 @@
             // txtBuscar
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(79, 6);
+            this.txtBuscar.Location = new System.Drawing.Point(159, 6);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(493, 29);
             this.txtBuscar.TabIndex = 31;
@@ -113,9 +113,9 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(26, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 24);
+            this.label10.Size = new System.Drawing.Size(127, 24);
             this.label10.TabIndex = 30;
-            this.label10.Text = "CPF";
+            this.label10.Text = "CPF ou CNPJ";
             // 
             // dgwCliente
             // 
@@ -129,11 +129,11 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.LightGray;
+            this.tabPage1.Controls.Add(this.btnConsultaCep);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.btnExcluir);
-            this.tabPage1.Controls.Add(this.button6);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label2);
@@ -158,6 +158,16 @@
             this.tabPage1.Size = new System.Drawing.Size(1025, 355);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Cadastro";
+            // 
+            // btnConsultaCep
+            // 
+            this.btnConsultaCep.Location = new System.Drawing.Point(243, 6);
+            this.btnConsultaCep.Name = "btnConsultaCep";
+            this.btnConsultaCep.Size = new System.Drawing.Size(80, 22);
+            this.btnConsultaCep.TabIndex = 57;
+            this.btnConsultaCep.Text = "CONSULTA";
+            this.btnConsultaCep.UseVisualStyleBackColor = true;
+            this.btnConsultaCep.Click += new System.EventHandler(this.btnConsultaCep_Click_1);
             // 
             // button4
             // 
@@ -199,16 +209,6 @@
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(390, 34);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(80, 22);
-            this.button6.TabIndex = 52;
-            this.button6.Text = "CONSULTA";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.btnConsultaCEP_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -223,11 +223,11 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(11, 11);
+            this.label9.Location = new System.Drawing.Point(8, 9);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(33, 16);
+            this.label9.Size = new System.Drawing.Size(89, 16);
             this.label9.TabIndex = 34;
-            this.label9.Text = "CPF";
+            this.label9.Text = "CPF ou CNPJ";
             // 
             // label2
             // 
@@ -242,7 +242,7 @@
             // txtCPF
             // 
             this.txtCPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCPF.Location = new System.Drawing.Point(75, 6);
+            this.txtCPF.Location = new System.Drawing.Point(107, 6);
             this.txtCPF.Name = "txtCPF";
             this.txtCPF.Size = new System.Drawing.Size(130, 22);
             this.txtCPF.TabIndex = 35;
@@ -268,10 +268,11 @@
             // txtCEP
             // 
             this.txtCEP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCEP.Location = new System.Drawing.Point(254, 34);
+            this.txtCEP.Location = new System.Drawing.Point(340, 34);
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(130, 22);
             this.txtCEP.TabIndex = 41;
+            this.txtCEP.Leave += new System.EventHandler(this.txtCEP_Leave);
             // 
             // label3
             // 
@@ -305,7 +306,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(214, 37);
+            this.label6.Location = new System.Drawing.Point(300, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 16);
             this.label6.TabIndex = 40;
@@ -331,7 +332,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(8, 66);
+            this.label7.Location = new System.Drawing.Point(8, 67);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 16);
             this.label7.TabIndex = 38;
@@ -358,7 +359,7 @@
             // txtTelefone
             // 
             this.txtTelefone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefone.Location = new System.Drawing.Point(75, 63);
+            this.txtTelefone.Location = new System.Drawing.Point(75, 64);
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(130, 22);
             this.txtTelefone.TabIndex = 39;
@@ -398,7 +399,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnExcluir;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label2;
@@ -422,5 +422,6 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgwCliente;
+        private System.Windows.Forms.Button btnConsultaCep;
     }
 }

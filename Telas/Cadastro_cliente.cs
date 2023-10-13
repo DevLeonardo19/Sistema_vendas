@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Primeiro_CRUD___Comp.Aerea.Dl;
+using Sistema_vendas.DI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Sistema_vendas.DI.ConsultaCnpj;
 
 namespace Sistema_vendas
 {
@@ -38,7 +40,7 @@ namespace Sistema_vendas
 
         private void dgwCliente_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            tabControlConsulta.SelectedIndex = 1;
+            tabControlConsulta.SelectedIndex = 1; 
             txtCPF.Text = this.dgwCliente.Rows[e.RowIndex].Cells[0].Value.ToString();
             txtNomeClie.Text = this.dgwCliente.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtTelefone.Text = this.dgwCliente.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -75,40 +77,7 @@ namespace Sistema_vendas
 
         private void btnConsultaCEP_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCEP.Text))
-            {
-                MessageBox.Show("Informe um CEP valido...", this.Text,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            else
-            {
-                string strURL = ($"https://viacep.com.br/ws/{txtCEP.Text.Trim()}/json/");
-
-                try
-                {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        var response = client.GetAsync(strURL).Result;
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var result = response.Content.ReadAsStringAsync().Result; //Conteudo da resposta
-                            Resultado resultado = JsonConvert.DeserializeObject<Resultado>(result);  //Compara as propriedades da classe resultado com a consulta
-
-                            txtUF.Text = resultado.UF;
-                            txtLocalidade.Text = resultado.Localidade;
-                            txtBairro.Text = resultado.Bairro;
-                            txtLogradouro.Text = resultado.Logradouro;
-                        }
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
+            
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
@@ -267,6 +236,93 @@ namespace Sistema_vendas
         private void tabPage2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnConsultaCep_Click_1(object sender, EventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(txtCPF.Text))
+            {
+                MessageBox.Show("Informe um CNPJ valido...", this.Text,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            }
+            else
+            {
+                string strURL = ($"https://publica.cnpj.ws/cnpj/{txtCPF.Text.Trim()}");
+
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var response = client.GetAsync(strURL).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var result = response.Content.ReadAsStringAsync().Result;
+                            ConsultaCnpj consulta = new ConsultaCnpj();
+                            consulta = JsonConvert.DeserializeObject<ConsultaCnpj>(result);                         
+                                                      
+                            
+                            txtLocalidade.Text = consulta.estabelecimento.cidade.Nome_cidade;
+                            txtBairro.Text = consulta.estabelecimento.Bairro;
+                            txtLogradouro.Text = consulta.estabelecimento.Logradouro;
+                            txtCEP.Text = consulta.estabelecimento.CEP;
+                            txtTelefone.Text = consulta.estabelecimento.DDD + consulta.estabelecimento.Telefone;
+                            txtNomeClie.Text = consulta.Nome;
+                            txtUF.Text = consulta.estabelecimento.estado.Sigla;
+                            txtComplemento.Text = consulta.estabelecimento.Complemento;
+
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCEP_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCEP.Text))
+            {
+                MessageBox.Show("Informe um CEP valido...", this.Text,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                string strURL = ($"https://viacep.com.br/ws/{txtCEP.Text.Trim()}/json/");
+
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var response = client.GetAsync(strURL).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var result = response.Content.ReadAsStringAsync().Result; //Conteudo da resposta
+                            ConsultaCep resultado = JsonConvert.DeserializeObject<ConsultaCep>(result);  //Compara as propriedades da classe resultado com a consulta
+
+                            txtUF.Text = resultado.UF;
+                            txtLocalidade.Text = resultado.Localidade;
+                            txtBairro.Text = resultado.Bairro;
+                            txtLogradouro.Text = resultado.Logradouro;
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
         }
     }
 }

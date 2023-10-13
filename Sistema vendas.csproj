@@ -187,8 +187,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DI\ConsultaCnpj.cs" />
     <Compile Include="DI\Database.cs" />
-    <Compile Include="DI\Resultado.cs" />
+    <Compile Include="DI\ConsultaCep.cs" />
     <Compile Include="Telas\Cadastro_cliente.cs">
       <SubType>Form</SubType>
     </Compile>

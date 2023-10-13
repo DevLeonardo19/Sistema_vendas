@@ -2,7 +2,7 @@
 
 namespace Sistema_vendas
 {
-    public class Resultado
+    public class ConsultaCep
     {
 
         [JsonProperty(PropertyName = "cep")]
@@ -23,17 +23,17 @@ namespace Sistema_vendas
         [JsonProperty(PropertyName = "uf")]
         public string UF { get; set; }
 
-        [JsonProperty(PropertyName = "ibge")]
-        public string IBGE { get; set; }
+        //[JsonProperty(PropertyName = "ibge")]
+        //public string IBGE { get; set; }
 
-        [JsonProperty(PropertyName = "gia")]
-        public string GIA { get; set; }
+        //[JsonProperty(PropertyName = "gia")]
+        //public string GIA { get; set; }
 
-        [JsonProperty(PropertyName = "ddd")]
-        public int DDD { get; set; }
+        //[JsonProperty(PropertyName = "ddd")]
+        //public int DDD { get; set; }
 
-        [JsonProperty(PropertyName = "siafi")]
-        public int SIAFI { get; set; }
+        //[JsonProperty(PropertyName = "siafi")]
+        //public int SIAFI { get; set; }
     }
 }
 

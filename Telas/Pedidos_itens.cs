@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -166,9 +167,12 @@ namespace Sistema_vendas.Telas
 
             try
             {
+                DateTime dataConvertida = DateTime.ParseExact(dataLancamento, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                string dataFormatada = dataConvertida.ToString("yyyy-MM-dd");
+
                 string sSQL = $@"
             INSERT INTO Pedidos (Cpf, Valor_tot, Data_Lancamento) VALUES 
-            ('{cpf}', {valorTotal}, '{dataLancamento}')";
+            ('{cpf}', {valorTotal}, '{dataFormatada}')";
 
                 dataBase.ExecutaSQLComando(sSQL);
 

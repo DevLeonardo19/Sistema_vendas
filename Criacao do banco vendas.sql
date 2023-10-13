@@ -1,0 +1,72 @@
+CREATE DATABASE SIS_VENDAS
+
+USE SIS_VENDAS
+
+
+DROP TABLE CLIENTE
+CREATE TABLE CLIENTE (
+
+Cpf VARCHAR(12) PRIMARY KEY,
+Nome_cli VARCHAR(150),
+Telefone INT,
+CEP VARCHAR(10),
+Logradouro VARCHAR (150),
+Complemento INT,
+Bairro VARCHAR (50),
+Localidade VARCHAR (50),
+UF VARCHAR (3)
+)
+
+
+
+CREATE TABLE PRODUTO (
+
+Cod_prod INT IDENTITY PRIMARY KEY,
+Nome_prod VARCHAR (100),
+Preco_prod DECIMAL (10,2)
+)
+
+
+drop table PEDIDOS
+CREATE TABLE PEDIDOS (
+
+Num_ped INT IDENTITY PRIMARY KEY,
+Cpf VARCHAR(12),
+Cod_prod INT,
+Valor_tot DECIMAL (10,2),
+Data_Lancamento DATE
+)
+
+
+DROP TABLE Itens_pedido
+CREATE TABLE Itens_pedido (
+
+Num_ped INT,
+Cod_prod INT,
+ID INT IDENTITY PRIMARY KEY,
+Quantidade INT,
+Valor_Linha DECIMAL (10,2)
+
+CONSTRAINT fk_pedidos_item
+FOREIGN KEY (Num_ped)
+REFERENCES PEDIDOS(Num_ped),
+
+CONSTRAINT fk_produtos_item
+FOREIGN KEY (Cod_prod)
+REFERENCES Produto(Cod_prod)
+)
+
+
+ALTER TABLE PEDIDOS
+ADD
+CONSTRAINT fk_cliente_pedidos
+FOREIGN KEY (Cpf)
+REFERENCES CLIENTE(Cpf)
+
+
+
+
+
+
+
+
